@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -167,14 +167,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObjectsModules\Animation.cpp" />
+    <ClCompile Include="GameObjectsModules\MovementBindings.cpp" />
+    <ClCompile Include="GameObjects\Builders\PlayerBuilder.cpp" />
+    <ClCompile Include="Exceptions\ReqPropsNotSpecified.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="GameObjects\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Exceptions\ReqPropsNotSpecified.h" />
+    <ClInclude Include="GameObjectsModules\MovementBindings.h" />
+    <ClInclude Include="GameObjects\Builders\PlayerBuilder.h" />
+    <ClInclude Include="GameObjects\Enums\GameObjFace.h" />
+    <ClInclude Include="GameObjects\GameObject.h" />
+    <ClInclude Include="GameObjects\Builders\GameObjectBuilder.h" />
+    <ClInclude Include="GameObjects\Enums\GameObjShape.h" />
+    <ClInclude Include="GameObjects\Enums\GameObjState.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui-SFML.h" />

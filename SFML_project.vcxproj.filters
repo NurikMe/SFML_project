@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков\GameObjects">
+      <UniqueIdentifier>{38f8911e-45fb-473c-ab56-45a20e869595}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\GameObjects">
+      <UniqueIdentifier>{be3b9325-528a-4abc-9974-f6359fb2f93f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\GameObjects\Builders">
+      <UniqueIdentifier>{d75b77c4-4272-488a-a69a-8d5a2601dff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\GameObjects\Builders">
+      <UniqueIdentifier>{b8ed8d9f-98e7-42b1-852f-6ca69ff8cbf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\GameObjectsModules">
+      <UniqueIdentifier>{1b8f0805-ee54-4163-97b7-4989b1212c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\GameObjectsModules">
+      <UniqueIdentifier>{0887d5bc-2e43-43f5-9bbf-b1be62d3f483}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -31,6 +49,21 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui-SFML.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Builders\PlayerBuilder.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Exceptions\ReqPropsNotSpecified.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectsModules\MovementBindings.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectsModules\Animation.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -60,6 +93,30 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Builders\GameObjectBuilder.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions\ReqPropsNotSpecified.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Builders\PlayerBuilder.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\GameObject.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Enums\GameObjShape.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Enums\GameObjState.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectsModules\MovementBindings.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Enums\GameObjFace.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
