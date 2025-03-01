@@ -15,12 +15,13 @@ namespace GameObjMod {
 		Animation(sf::Texture& texture, sf::Vector2u imageCount, float switchTime);
 		~Animation();
 
-		void Update(sf::Vector2<unsigned int> index, float deltaTime, GameObjFace face);
+		void Update(float deltaTime, GameObjFace face);
 
 	private:
 		//variables
 		sf::Vector2u imageCount;
 		sf::Vector2u currentImage;
+		sf::Texture texture;
 
 		float totalTime;
 		float switchTime;

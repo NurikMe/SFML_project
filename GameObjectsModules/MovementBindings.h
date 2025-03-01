@@ -7,13 +7,12 @@ using namespace GameObjects;
 namespace GameObjMod {
 	class MovementBindings {
 	public:
-		MovementBindings(Player& player);
+		MovementBindings();
 
 		//functions for Events
 		auto GetOnMouseButtonPressed();
 		auto GetOnKeyPressed();
 
 	private:
-		Player player;
 	};
 }

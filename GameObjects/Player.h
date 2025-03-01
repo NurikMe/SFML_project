@@ -23,11 +23,17 @@ namespace GameObjects {
 		Player(const Player& player);
 
 		void Update(float deltaTime) override;
-		void Move()
-		void Draw(sf::RenderWindow window) override;
+		void Draw(sf::RenderWindow& window) override;
+
+		//getters and setters
+		GameObjState getState();
+		void setState(GameObjState state);
+
+		GameObjFace getFace();
+		void setFace(GameObjFace state);
 
 	private:
 		Animation* animation;
-		MovementBindings movement;
+		//MovementBindings movement;
 	};
 }

@@ -8,8 +8,12 @@ PlayerBuilder::PlayerBuilder() {
 }
 
 PlayerBuilder& PlayerBuilder::SetBodySize(sf::Vector2f&& size) {
-	this->body = std::make_unique<sf::RectangleShape>(new sf::RectangleShape(size));
+	this->body = std::make_unique<sf::RectangleShape>(*new sf::RectangleShape(size));
 	this->body->setOrigin(size / 2.0f);
+
+	//just to check animations
+	this->animation = new Animation(*this->textures.find(this->state)->second.get(), {10 , 1}, 0.1f);
+
 	return *this;
 }
 

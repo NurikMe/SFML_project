@@ -16,7 +16,7 @@ namespace GameObjects {
 			sf::Vector2f speed,
 			sf::Vector2<unsigned int> index,
 			GameObjFace face
-		) : body(std::move(body)), 
+		) : body{ std::move(body) },
 			state(state), 
 			textures(std::move(textures)), 
 			speed(speed),
@@ -24,7 +24,7 @@ namespace GameObjects {
 			face(face) { }
 
 		virtual void Update(float deltaTime) = 0;
-		virtual void Draw(sf::RenderWindow window) = 0;
+		virtual void Draw(sf::RenderWindow& window) = 0;
 
 	protected:
 		std::unique_ptr<sf::RectangleShape> body;

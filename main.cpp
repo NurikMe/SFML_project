@@ -12,8 +12,6 @@
 
 //Custom headers
 #include "GameObjects/Builders/PlayerBuilder.h"
-#include "Animation.h"
-#include "Player.h"
 
 
 int main()
@@ -28,12 +26,15 @@ int main()
 	playerIdleTexture.loadFromFile("120x80_PNGSheets\\_Idle.png");
 	playerTurnTexture.loadFromFile("120x80_PNGSheets\\_TurnAround.png");*/
 	std::unordered_map<GameObjState, std::unique_ptr<sf::Texture>> textures;
-	textures.try_emplace(Enums::GameObjState::Idle, std::make_unique<sf::Texture>(new sf::Texture("120x80_PNGSheets\\_Idle.png")));
-	textures.try_emplace(Enums::GameObjState::Run, new sf::Texture("120x80_PNGSheets\\_Run.png"));
-	textures.try_emplace(Enums::GameObjState::Turn, new sf::Texture("120x80_PNGSheets\\_TurnAround.png"));
+	std::unique_ptr<sf::Texture> text1 = std::make_unique<sf::Texture>("120x80_PNGSheets\\_Idle.png");
+	textures.try_emplace(Enums::GameObjState::Idle, std::move(text1));
+	std::unique_ptr<sf::Texture> text2 = std::make_unique<sf::Texture>("120x80_PNGSheets\\_Run.png");
+	textures.try_emplace(Enums::GameObjState::Run, std::move(text2));
+	std::unique_ptr<sf::Texture> text3 = std::make_unique<sf::Texture>("120x80_PNGSheets\\_TurnAround.png");
+	textures.try_emplace(Enums::GameObjState::Turn, std::move(text3));
 
 	sf::RectangleShape player({ 120.0f, 80.0f });
-	player.setTexture(&playerIdleTexture);
+	//player.setTexture(&playerIdleTexture);
 	player.setOrigin(player.getSize() / 2.0f);
 
 	Builders::PlayerBuilder playerBuilder;
@@ -67,20 +68,26 @@ int main()
 		}
 		};
 
-	const auto onKeyPressed = [&player](const sf::Event::KeyPressed& key) {
+	const auto onKeyPressed = [&player, &player1](const sf::Event::KeyPressed& key) {
 		if (key.scancode == sf::Keyboard::Scancode::A) {
-			player.move({ -1.0f, 0.0f });
+			player1.setState(GameObjState::Run);
+			player1.setFace(GameObjFace::Left);
+
+			/*player.move({ -1.0f, 0.0f });
 			if (player.getScale().x != -1) {
 				player.setScale({ -1, 1 });
 				player.setPosition({ player.getPosition().x + player.getSize().x, player.getPosition().y });
-			}
+			}*/
 		}
 		if (key.scancode == sf::Keyboard::Scancode::D) {
-			player.move({ 1.0f, 0.0f });
+			player1.setState(GameObjState::Run);
+			player1.setFace(GameObjFace::Right);
+
+			/*player.move({ 1.0f, 0.0f });
 			if (player.getScale().x != 1) {
 				player.setScale({ 1, 1 });
 				player.setPosition({ player.getPosition().x - player.getSize().x, player.getPosition().y });
-			}
+			}*/
 		}
 		if (key.scancode == sf::Keyboard::Scancode::S) {
 			player.move({ 0.0f, 1.0f });
@@ -88,6 +95,10 @@ int main()
 		if (key.scancode == sf::Keyboard::Scancode::W) {
 			player.move({ 0.0f, -1.0f });
 		}
+		};
+
+	const auto onKeyReleased = [&player, &player1](const sf::Event::KeyReleased& key) {
+		player1.setState(GameObjState::Idle);
 		};
 
 	const auto onMouseButtonPressed = [&player](const sf::Event::MouseButtonPressed& button) {
@@ -100,15 +111,17 @@ int main()
 	while (window.isOpen()) {
 		deltaTime = clock.restart().asSeconds();
 
-		window.handleEvents(onClosed, onResized, onTextEntered, onKeyPressed, onMouseButtonPressed);
+		window.handleEvents(onClosed, onResized, onTextEntered, onKeyPressed, onKeyReleased, onMouseButtonPressed);
 
-		animation.Update(0, deltaTime);
-		player.setTextureRect(animation.uvRect);
+		player1.Update(deltaTime);
 
-		view.setCenter(player.getPosition());
+		//player.setTextureRect(animation.uvRect);
+
+		//view.setCenter(player.getPosition());
 		window.clear();
-		window.setView(view);
-		window.draw(player);
+		//window.setView(view);
+		player1.Draw(window);
+		//window.draw(player);
 		window.display();
 
 		std::this_thread::sleep_for(std::chrono::duration<double, std::milli> (1000.0f / 24.0f));

@@ -2,10 +2,10 @@
 
 using namespace GameObjMod;
 
-MovementBindings::MovementBindings(Player& player) : player(player) { }
+MovementBindings::MovementBindings(){ }
 
 auto MovementBindings::GetOnKeyPressed() {
-	return [&player = this->player](const sf::Event::MouseButtonPressed& button) {
+	return [](const sf::Event::MouseButtonPressed& button) {
 		if (button.button == sf::Mouse::Button::Left) {
 
 		}
@@ -13,7 +13,7 @@ auto MovementBindings::GetOnKeyPressed() {
 }
 
 auto MovementBindings::GetOnMouseButtonPressed() {
-	return [&player = this->player](const sf::Event::KeyPressed& button) {
+	return [](const sf::Event::KeyPressed & button) {
 		if (button.scancode == sf::Keyboard::Scancode::D) {
 
 		}

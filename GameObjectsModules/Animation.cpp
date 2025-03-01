@@ -7,7 +7,7 @@ Animation::Animation(sf::Texture& texture, sf::Vector2u imageCount, float switch
 	this->switchTime = switchTime;
 	totalTime = 0.0f;
 	currentImage.x = 0;
-	texture.
+	this->texture = texture;
 
 	uvRect.size.x = texture.getSize().x / float(imageCount.x);
 	uvRect.size.y = texture.getSize().y / float(imageCount.y);
@@ -17,8 +17,7 @@ Animation::~Animation() {
 
 }
 
-void Animation::Update(sf::Vector2<unsigned int> index, float deltaTime, GameObjFace face) {
-	currentImage.y = row;
+void Animation::Update(float deltaTime, GameObjFace face) {
 	totalTime += deltaTime;
 
 	if (totalTime >= switchTime) {
