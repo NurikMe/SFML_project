@@ -26,6 +26,7 @@ int main()
 	playerIdleTexture.loadFromFile("120x80_PNGSheets\\_Idle.png");
 	playerTurnTexture.loadFromFile("120x80_PNGSheets\\_TurnAround.png");*/
 	std::unordered_map<GameObjState, std::unique_ptr<sf::Texture>> textures;
+
 	std::unique_ptr<sf::Texture> text1 = std::make_unique<sf::Texture>("120x80_PNGSheets\\_Idle.png");
 	textures.try_emplace(Enums::GameObjState::Idle, std::move(text1));
 	std::unique_ptr<sf::Texture> text2 = std::make_unique<sf::Texture>("120x80_PNGSheets\\_Run.png");
@@ -34,14 +35,14 @@ int main()
 	textures.try_emplace(Enums::GameObjState::Turn, std::move(text3));
 
 	sf::RectangleShape player({ 120.0f, 80.0f });
-	//player.setTexture(&playerIdleTexture);
+	player.setTexture(textures.find(GameObjState::Idle)->second.get());
 	player.setOrigin(player.getSize() / 2.0f);
 
 	Builders::PlayerBuilder playerBuilder;
 	playerBuilder.SetTextures(textures);
 	playerBuilder.SetBodySize({ 120.0f, 80.0f });
 	playerBuilder.SetState(Enums::GameObjState::Idle);
-	playerBuilder.SetSpeed({ 20.0, 20.0 });
+	playerBuilder.SetSpeed({ 200.0, 200.0 });
 	playerBuilder.SetIndex({ 0, 0 });
 	playerBuilder.SetFace(Enums::GameObjFace::Right);
 
@@ -108,6 +109,11 @@ int main()
 		}
 		};
 
+	std::cout << player.getTexture() << std::endl;
+	player1.setBody(player);
+	//player1.getBody()->setFillColor(sf::Color(20, 30, 40));
+	auto ptr = std::make_unique<sf::RectangleShape>(std::move(player));
+	//ptr.get()->setFillColor(sf::Color(256, 30, 40));
 	while (window.isOpen()) {
 		deltaTime = clock.restart().asSeconds();
 
@@ -120,11 +126,14 @@ int main()
 		//view.setCenter(player.getPosition());
 		window.clear();
 		//window.setView(view);
-		player1.Draw(window);
+		//player1.Draw(window);
+		//std::cout << player1.getBody()->getTexture() << std::endl;
+		//window.draw(*ptr);
+		window.draw(player1.getBody());
 		//window.draw(player);
 		window.display();
 
-		std::this_thread::sleep_for(std::chrono::duration<double, std::milli> (1000.0f / 24.0f));
+		//std::this_thread::sleep_for(std::chrono::duration<double, std::milli> (1000.0f / 24.0f));
 	}
 
 

@@ -23,6 +23,16 @@ namespace GameObjects {
 			index(index),
 			face(face) { }
 
+		GameObject(GameObject&& object) noexcept 
+										: body{ std::move(object.body) }, 
+										  state(object.state),  
+										  textures{ std::move(textures) },
+										  speed(object.speed),
+										  index(object.index),
+										  face(object.face) { }
+
+		GameObject(GameObject& object) = delete;
+
 		virtual void Update(float deltaTime) = 0;
 		virtual void Draw(sf::RenderWindow& window) = 0;
 

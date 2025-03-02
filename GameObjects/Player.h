@@ -20,7 +20,7 @@ namespace GameObjects {
 			Animation* animation
 		);
 
-		Player(const Player& player);
+		Player(Player&& player);
 
 		void Update(float deltaTime) override;
 		void Draw(sf::RenderWindow& window) override;
@@ -31,6 +31,9 @@ namespace GameObjects {
 
 		GameObjFace getFace();
 		void setFace(GameObjFace state);
+
+		sf::RectangleShape getBody();
+		void setBody(sf::RectangleShape& body);
 
 	private:
 		Animation* animation;

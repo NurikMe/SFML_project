@@ -13,6 +13,7 @@ PlayerBuilder& PlayerBuilder::SetBodySize(sf::Vector2f&& size) {
 
 	//just to check animations
 	this->animation = new Animation(*this->textures.find(this->state)->second.get(), {10 , 1}, 0.1f);
+	this->body->setTexture(this->textures.find(state)->second.get());
 
 	return *this;
 }

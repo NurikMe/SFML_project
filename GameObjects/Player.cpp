@@ -8,11 +8,10 @@ Player::Player(std::unique_ptr<sf::RectangleShape> body,
 	sf::Vector2f speed,
 	sf::Vector2<unsigned int> index,
 	GameObjFace face,
-	Animation* animation) : GameObject(std::move(body), state, textures, speed, index, face),
+	Animation* animation) : GameObject(std::move(body), state, std::move(textures), speed, index, face),
 	animation(animation) { }
 
-Player::Player(const Player& player) : GameObject(std::move(body), state, textures, speed, index, face),
-animation(animation) { }
+Player::Player(Player&& player) : GameObject{ std::move(player) }, animation(animation) { }
 
 GameObjState Player::getState() {
 	return this->state;
@@ -35,6 +34,7 @@ void Player::setState(GameObjState state) {
 
 		this->index = {0, 1};
 		this->animation = new Animation(*this->textures.find(state)->second.get(), imageCount, 0.1f);
+		this->body->setTexture(this->textures.find(state)->second.get());
 	}
 }
 
@@ -70,8 +70,17 @@ void Player::Update(float deltaTime) {
 	}
 
 	animation->Update(deltaTime, this->face);
+	this->body->setTextureRect(this->animation->uvRect);
+}
+
+sf::RectangleShape Player::getBody() {
+	return *(this->body);
+}
+
+void Player::setBody(sf::RectangleShape& body) {
+	this->body = std::make_unique<sf::RectangleShape>(std::move(body));
 }
 
 void Player::Draw(sf::RenderWindow& window) {
-	window.draw(*body.get());
+	window.draw(*this->body.get());
 }
